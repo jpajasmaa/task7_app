@@ -48,7 +48,7 @@ def preprocess(ds_row):
     return image, label
 
 
-subscription_key = "a213fbf607b041829b03643240c6218f"
+subscription_key = "2c3c11f47df74807be37f2497ab81236"
 endpoint = "https://tiesdeepvision.cognitiveservices.azure.com/"
 
 computervision_client = ComputerVisionClient(endpoint, CognitiveServicesCredentials(subscription_key))

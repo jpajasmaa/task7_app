@@ -1,0 +1,9 @@
+azure-core
+azure-cognitiveservices-vision-computervision
+azure-ai-textanalytics
+google-player-scraper
+flask-restful
+flask
+pillow
+gevent
+numpy

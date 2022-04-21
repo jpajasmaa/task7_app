@@ -18,8 +18,6 @@ app = Flask(__name__)
 api = Api(app)
 
 
-
-
 subscription_key = "" 
 endpoint = ""
 

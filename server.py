@@ -43,7 +43,6 @@ def classify():
         app_id = re.search("id=([a-z.0-9]+)", url).group(1)
         print(app_id)
 
-        app_id = 'com.rovio.abclassic22'
         icon_url, app_desc, review_comments = scrape_app_details(app_id)
 
         # give url to the service

@@ -7,11 +7,11 @@ from azure.ai.textanalytics import TextAnalyticsClient
 from msrest.authentication import CognitiveServicesCredentials
 
 
-VISION_API_KEY = "a213fbf607b041829b03643240c6218f"
-VISION_API_ENDPOINT = "https://tiesdeepvision.cognitiveservices.azure.com/"
+VISION_API_KEY = ""
+VISION_API_ENDPOINT = ""
 
-TEXT_API_KEY = "1b926c23338948078f054591fafb82e5"
-TEXT_API_ENDPOINT = "https://congserviceappp.cognitiveservices.azure.com/"
+TEXT_API_KEY = ""
+TEXT_API_ENDPOINT = ""
 
 
 def scrape_app_details(app_id='com.rovio.abclassic22'):

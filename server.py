@@ -37,13 +37,34 @@ def index_page():
 @app.route('/classify', methods=['GET', 'POST'])
 def classify():
     if request.method == 'POST':
-        url = request.json
-        print(f"URL: {url}")
+        app_id = request.json
 
-        app_id = re.search("id=([a-z.0-9]+)", url).group(1)
-        print(app_id)
+        res = "Results are: "
+        print(f"app ID : {app_id}")
+
+        # app_id = re.search("id=([a-z.0-9]+)", url).group(1)
+        # print(app_id)
 
         icon_url, app_desc, review_comments = scrape_app_details(app_id)
+
+        # example URL app
+        # app_id = 'com.rovio.abclassic22'
+        icon_url, app_desc, review_comments = scrape_app_details(app_id)
+
+        icon_tags = get_icon_tags_azure(icon_url)
+        print(f"Icon Tags: {icon_tags}")
+
+        icon_desc = get_icon_description_azure(icon_url)
+        print(f"Icon Description: {icon_desc}")
+
+        description_entities = get_text_entities_gcp(app_desc)
+        print(f"Key game features (description entities): {description_entities} ")
+
+        positive, neutral, negative = get_reviews_sentiment_azure(review_comments)
+        print(f"Review Sentiments: Positive({positive}), Neutral({neutral}), Negative({negative})")
+
+        #res = res + str(icon_tags) + "\n" + str(icon_desc)  # + "\n" + str(description_entities)
+        #+ "\n" + "Review sentiments: Positive " + str(positive) + "Neutral: " + str(neutral) + "Negative: " + str(negative)
 
         # give url to the service
         tags_result_remote = computervision_client.tag_image(icon_url)
@@ -59,9 +80,16 @@ def classify():
         print()
 
         # 
-        res = "put results to this string"
+        # res = "put results to this string"
 
-        return jsonify(result=res)
+        return jsonify(
+            icon_t=str(icon_tags),
+            icon_d=str(icon_desc),
+            desc_e=str(description_entities),
+            pos=str(positive),
+            neu=str(neutral),
+            neg=str(negative),
+                       )
 
 
 if __name__ == "__main__":

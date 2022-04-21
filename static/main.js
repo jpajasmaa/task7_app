@@ -12,26 +12,27 @@ function fileSelectHandler(e) {
   }
 }
 
+var inputString = document.getElementById("input-txt")
+
 imagePreview = document.getElementById("image-preview");
 var imageDisplay = document.getElementById("image-display");
 var uploadCaption = document.getElementById("upload-caption");
 var predResult = document.getElementById("pred-result");
 var loader = document.getElementById("loader");
 
+var resultBox = document.getElementById("result-box");
+
 function submitImage() {
   // action for the submit button
   console.log("submit");
 
-  if (!imageDisplay.src || !imageDisplay.src.startsWith("data")) {
-    window.alert("Please select an image before submit.");
-    return;
-  }
-
-  loader.classList.remove("hidden");
-  imageDisplay.classList.add("loading");
+  var inputString = document.getElementById("input-txt")
+  //loader.classList.remove("hidden");
+  //imageDisplay.classList.add("loading");
 
   // call the predict function of the backend
-  predictImage(imageDisplay.src);
+  console.log(inputString.value);
+  predictImage(inputString.value);
 }
 
 
@@ -94,9 +95,11 @@ function displayResult(data) {
   hide(loader);
   console.log(data)
   var resultString = data.result.toString(); 
-  predResult.innerHTML = resultString 
+  // predResult.innerHTML = resultString 
+  resultBox.innerHTML = resultString;
 
-  show(predResult);
+   show(predResult);
+   show(resultBox);
 }
 
 // utility
@@ -119,11 +122,13 @@ function clearImage() {
   imagePreview.src = "";
   imageDisplay.src = "";
   predResult.innerHTML = "";
+  resultBox.innerHTML = "";
 
   hide(imagePreview);
   hide(imageDisplay);
   hide(loader);
   hide(predResult);
+  hide(resultBox);
   show(uploadCaption);
 
   imageDisplay.classList.remove("loading");

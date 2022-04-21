@@ -37,15 +37,13 @@ def index_page():
 @app.route('/classify', methods=['GET', 'POST'])
 def classify():
     if request.method == 'POST':
-        app_id = request.json
+        play_store_url = request.json
 
         res = "Results are: "
-        print(f"app ID : {app_id}")
+        print(f"URL: {play_store_url}")
 
-        # app_id = re.search("id=([a-z.0-9]+)", url).group(1)
-        # print(app_id)
-
-        icon_url, app_desc, review_comments = scrape_app_details(app_id)
+        app_id = re.search("id=([a-z.0-9]+)", play_store_url).group(1)
+        print(app_id)
 
         # example URL app
         # app_id = 'com.rovio.abclassic22'
@@ -63,24 +61,7 @@ def classify():
         positive, neutral, negative = get_reviews_sentiment_azure(review_comments)
         print(f"Review Sentiments: Positive({positive}), Neutral({neutral}), Negative({negative})")
 
-        #res = res + str(icon_tags) + "\n" + str(icon_desc)  # + "\n" + str(description_entities)
-        #+ "\n" + "Review sentiments: Positive " + str(positive) + "Neutral: " + str(neutral) + "Negative: " + str(negative)
 
-        # give url to the service
-        tags_result_remote = computervision_client.tag_image(icon_url)
-
-        # Print results with confidence score
-        print("Tags in the remote image: ")
-        if (len(tags_result_remote.tags) == 0):
-            print("No tags detected.")
-        else:
-            for tag in tags_result_remote.tags:
-                
-                print("'{}' with confidence {:.2f}%".format(tag.name, tag.confidence * 100))
-        print()
-
-        # 
-        # res = "put results to this string"
 
         return jsonify(
             icon_t=str(icon_tags),

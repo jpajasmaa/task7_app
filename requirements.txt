@@ -1,7 +1,8 @@
 azure-core
 azure-cognitiveservices-vision-computervision
 azure-ai-textanalytics
-google-player-scraper
+google-cloud-language
+google-play-scraper
 flask-restful
 flask
 pillow

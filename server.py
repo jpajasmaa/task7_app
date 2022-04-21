@@ -45,7 +45,7 @@ def preprocess(ds_row):
     
     # Onehot encoding labels
 
-    return image, label
+    return image#, label
 
 
 subscription_key = "2c3c11f47df74807be37f2497ab81236"
